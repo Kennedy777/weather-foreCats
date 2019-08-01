@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
-import Form from "./app_component/form.component";
-import Weather from "./app_component/weather.component";
+import Form from "./components/form.component";
+import Weather from "./components/weather.component";
+import Cat from "./components/cat.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // big thanks for open-source icons from https://github.com/erikflowers/weather-icons
@@ -76,7 +77,7 @@ class App extends React.Component {
 
     if (country && city) {
       const api_call = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`
+        `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}&units=imperial`
       );
 
       const response = await api_call.json();
@@ -92,7 +93,7 @@ class App extends React.Component {
         error: false
       });
 
-      // seting icons
+      // set icons
       this.get_WeatherIcon(this.weatherIcon, response.weather[0].id);
 
       console.log(response);
@@ -115,6 +116,8 @@ class App extends React.Component {
           temp_min={this.state.temp_min}
           description={this.state.description}
         />
+        <Cat />
+        
       </div>
     );
   }
